@@ -40,17 +40,17 @@ let roundCount = 0; // track the number of rounds that have been played so far
   {
     color: "green",
     selector: document.querySelector(".js-pad-green"),
-    sound: new Audio("..assets/simon-says-sound-2.mp3"),
+    sound: new Audio("../assets/simon-says-sound-2.mp3"),
   },
   {
     color: "blue",
     selector: document.querySelector(".js-pad-blue"),
-    sound: new Audio("..assets/simon-says-sound-3.mp3"),
+    sound: new Audio("../assets/simon-says-sound-3.mp3"),
   },
   {
     color: "yellow",
     selector: document.querySelector(".js-pad-yellow"),
-    sound: new Audio("..assets/simon-says-sound-4.mp3"),
+    sound: new Audio("../assets/simon-says-sound-4.mp3"),
   }
   // TODO: Add the objects for the green, blue, and yellow pads. Use object for the red pad above as an example.
 ];
@@ -88,7 +88,7 @@ function startButtonHandler() {
 
   startButton.classList.add('hidden');
 
-  const statusSpan = document.getElementById('status-span');
+  const statusSpan = document.querySelector('.js-status');
   statusSpan.classList.remove('hidden');
 
   playComputerTurn();
@@ -116,6 +116,14 @@ function startButtonHandler() {
 function padHandler(event) {
   const { color } = event.target.dataset;
   if (!color) return;
+
+  const pad = pads.find(p => p.color === color);
+
+  if (pad && pad.sound) {
+    pad.sound.play();
+  }
+
+  checkPress(color);
 
   // TODO: Write your code here.
   return color;
