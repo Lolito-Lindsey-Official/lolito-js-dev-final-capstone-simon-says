@@ -35,7 +35,7 @@ let roundCount = 0; // track the number of rounds that have been played so far
   {
     color: "red",
     selector: document.querySelector(".js-pad-red"),
-    sound: new Audio("../assets/simon-says-sound-1.mp3"),
+    sound: new Audio("..assets/simon-says-sound-1.mp3"),
   },
   {
     color: "green",
@@ -102,7 +102,7 @@ function startButtonHandler() {
  * 1. `const { color } = event.target.dataset;` extracts the value of `data-color`
  * attribute on the element that was clicked and stores it in the `color` variable
  *
- * 2. `if (!color) return;` exits the function if the `color` variable is falsy
+ * 2. `if (!color) return;` exits the function if the `color` variable is false
  *
  * 3. Use the `.find()` method to retrieve the pad from the `pads` array and store it
  * in a variable called `pad`
@@ -116,13 +116,13 @@ function startButtonHandler() {
 function padHandler(event) {
   const { color } = event.target.dataset;
   if (!color) return;
-
+  // Grabs the pad from the 'pads' array to determine whether the pad's color is strictly equal to the same color
   const pad = pads.find(p => p.color === color);
 
   if (pad && pad.sound) {
     pad.sound.play();
   }
-
+  // Confirms the player's pad selection
   checkPress(color);
 
   // TODO: Write your code here.
@@ -156,6 +156,21 @@ function padHandler(event) {
  */
 function setLevel(level = 1) {
   // TODO: Write your code here.
+  const levelsOfRounds = {
+    1: 8,
+    2: 14,
+    3: 20,
+    4: 31
+  };
+
+  if (levelsOfRounds[level]) {
+    maxRoundCount = levelsOfRounds[level];
+    return maxRoundCount;
+  }
+  
+  else {
+      return "Enter one the following levels: 1, 2, 3, 4";
+  }
 }
 
 /**
@@ -174,9 +189,9 @@ function setLevel(level = 1) {
  * getRandomItem([1, 2, 3, 4]) //> returns 1
  */
 function getRandomItem(collection) {
-  // if (collection.length === 0) return null;
-  // const randomIndex = Math.floor(Math.random() * collection.length);
-  // return collection[randomIndex];
+    if (collection.length === 0) return null;
+    const randomIndex = Math.floor(Math.random() * collection.length);
+     return collection[randomIndex];
 }
 
 /**
@@ -184,6 +199,9 @@ function getRandomItem(collection) {
  */
 function setText(element, text) {
   // TODO: Write your code here.
+  if (element) {
+    element.textContent = text;
+  }
   return element;
 }
 
@@ -202,6 +220,19 @@ function setText(element, text) {
 
 function activatePad(color) {
   // TODO: Write your code here.
+  const pad = pads.find(p => p.color === color);
+
+  
+
+  pad.selector.classList.add("activated");
+
+  if (pad.sound) {
+    pad.sound.play();
+  }
+
+  setTimeout(() => {
+    pad.selector.classList.remove("activated"); 
+  }, 500);
 }
 
 /**
