@@ -4,7 +4,7 @@
 
  const startButton = document.querySelector(".js-start-button");
  // TODO: Add the missing query selectors:
- const statusSpan = document.querySelector("j.s-status"); // Use querySelector() to get the status element
+ const statusSpan = document.querySelector(".js-status"); // Use querySelector() to get the status element
  const heading = document.querySelector(".js-heading"); // Use querySelector() to get the heading element
  const padContainer = document.querySelector(".js-pad-container"); // Use querySelector() to get the heading element
 
@@ -35,7 +35,7 @@ let roundCount = 0; // track the number of rounds that have been played so far
   {
     color: "red",
     selector: document.querySelector(".js-pad-red"),
-    sound: new Audio("..assets/simon-says-sound-1.mp3"),
+    sound: new Audio("../assets/simon-says-sound-1.mp3"),
   },
   {
     color: "green",
@@ -253,10 +253,10 @@ function activatePads(sequence) {
   // TODO: Write your code here.
   sequence.forEach((color, index) => {
 
-    const activatedPadDelay = 600 * (index + 1);
+    const activatedPadDelay = 500 * (index + 1);
 
     setTimeout(() => {
-      activatePad(color);
+      activatePad(color)
     }, activatedPadDelay);
   });
 }
@@ -292,10 +292,13 @@ function activatePads(sequence) {
 
   setText(heading, `Round ${roundCount} of ${maxRoundCount}`);
   // Gets a random color from the pads array above and activates the pads
-  const randomPadColor = getRandomItem(["red", "green", "blue", "yellow"]);
-  computerSequence.push(randomPadColor);
+  const randomColor = getRandomItem(["red", "green", "blue", "yellow"]);
+  computerSequence.push(randomColor);
 
-  setTimeout(() => playHumanTurn(roundCount), roundCount * 600 + 1000); // 5
+  activatePads(computerSequence);
+
+  setTimeout(() => playHumanTurn(roundCount),
+  padContainer.classList.remove("unclickable"), roundCount * 500 + 1000); // 5
 }
 
 /**
@@ -307,6 +310,12 @@ function activatePads(sequence) {
  */
 function playHumanTurn() {
   // TODO: Write your code here.
+  // allows the human user to make a move
+  padContainer.classList.remove("unclickable");
+
+// tells the user how many attempts they have left
+ const pressesLeft = computerSequence.length - playerSequence.length; 
+ setText(statusSpan, `Presses left: ${pressesLeft}`);
 }
 
 /**
