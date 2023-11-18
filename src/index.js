@@ -4,7 +4,7 @@
 
  const startButton = document.querySelector(".js-start-button");
  // TODO: Add the missing query selectors:
- const statusSpan = document.querySelector(".js-status"); // Use querySelector() to get the status element
+ const statusSpan = document.querySelector("j.s-status"); // Use querySelector() to get the status element
  const heading = document.querySelector(".js-heading"); // Use querySelector() to get the heading element
  const padContainer = document.querySelector(".js-pad-container"); // Use querySelector() to get the heading element
 
@@ -222,7 +222,7 @@ function activatePad(color) {
   // TODO: Write your code here.
   const pad = pads.find(p => p.color === color);
 
-  
+  if(!pad) return;
 
   pad.selector.classList.add("activated");
 
@@ -231,7 +231,7 @@ function activatePad(color) {
   }
 
   setTimeout(() => {
-    pad.selector.classList.remove("activated"); 
+    pad.selector.classList.remove("activated");
   }, 500);
 }
 
@@ -251,6 +251,14 @@ function activatePad(color) {
 
 function activatePads(sequence) {
   // TODO: Write your code here.
+  sequence.forEach((color, index) => {
+
+    const activatedPadDelay = 600 * (index + 1);
+
+    setTimeout(() => {
+      activatePad(color);
+    }, activatedPadDelay);
+  });
 }
 
 /**
@@ -278,6 +286,14 @@ function activatePads(sequence) {
  */
  function playComputerTurn() {
   // TODO: Write your code here.
+  padContainer.classList.add("unclickable");
+  // the computer makes a turn
+  setText(statusSpan, "The computer's turn...");
+
+  setText(heading, `Round ${roundCount} of ${maxRoundCount}`);
+  // Gets a random color from the pads array above and activates the pads
+  const randomPadColor = getRandomItem(["red", "green", "blue", "yellow"]);
+  computerSequence.push(randomPadColor);
 
   setTimeout(() => playHumanTurn(roundCount), roundCount * 600 + 1000); // 5
 }
