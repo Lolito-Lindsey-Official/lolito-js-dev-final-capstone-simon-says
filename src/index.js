@@ -342,6 +342,22 @@ function playHumanTurn() {
  */
 function checkPress(color) {
   // TODO: Write your code here.
+  playerSequence.push(color);
+
+  const index = playerSequence.length - 1;
+
+  const remainingPresses = computerSequence.length - playerSequence.length;
+
+  setText(statusSpan, `Presses left: ${remainingPresses}`);
+
+  if (computerSequence[index] !== playerSequence[index]) {
+    resetGame("Oops! Wrong pad. Try again!");
+    return;
+  }
+
+  if (remainingPresses === 0) {
+    checkRound();
+  }
 }
 
 /**
@@ -361,6 +377,19 @@ function checkPress(color) {
 
 function checkRound() {
   // TODO: Write your code here.
+  if (playerSequence.length === maxRoundCount) {
+    resetGame("Success! You have completed all the rounds!");
+  } else {
+    roundCount++;
+
+    playerSequence = []; 
+
+    setText(statusSpan, "Nice! Keep going!");
+
+    setTimeout(() => {
+      playComputerTurn();
+    }, 1000);
+  }
 }
 
 /**
@@ -374,13 +403,15 @@ function checkRound() {
  */
 function resetGame(text) {
   // TODO: Write your code here.
+  computerSequence = [];
+  playerSequence = [];
+  roundCount = 1;
 
-  // Uncomment the code below:
-  // alert(text);
-  // setText(heading, "Simon Says");
-  // startButton.classList.remove("hidden");
-  // statusSpan.classList.add("hidden");
-  // padContainer.classList.add("unclickable");
+  alert(text);
+  setText(heading, "Simon Says");
+  startButton.classList.remove("hidden");
+  statusSpan.classList.add("hidden");
+  padContainer.classList.add("unclickable");
 }
 
 /**
