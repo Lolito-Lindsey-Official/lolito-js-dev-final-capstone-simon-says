@@ -221,7 +221,7 @@ function setText(element, text) {
 function activatePad(color) {
   // TODO: Write your code here.
   const pad = pads.find(p => p.color === color);
-
+  //if it's not a pad, return nothing
   if(!pad) return;
 
   pad.selector.classList.add("activated");
@@ -313,7 +313,6 @@ function playHumanTurn() {
   // allows the human user to make a move
   padContainer.classList.remove("unclickable");
 
-// tells the user how many attempts they have left
  const pressesLeft = computerSequence.length - playerSequence.length; 
  setText(statusSpan, `Presses left: ${pressesLeft}`);
 }
@@ -347,7 +346,7 @@ function checkPress(color) {
   const index = playerSequence.length - 1;
 
   const remainingPresses = computerSequence.length - playerSequence.length;
-
+// tells the user how many attempts they have left
   setText(statusSpan, `Presses left: ${remainingPresses}`);
 
   if (computerSequence[index] !== playerSequence[index]) {
