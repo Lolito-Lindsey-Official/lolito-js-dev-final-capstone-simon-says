@@ -298,9 +298,7 @@ function activatePads(sequence) {
   activatePads(computerSequence);
 
   setTimeout(() => playHumanTurn(roundCount),
-  padContainer.classList.remove("unclickable"), roundCount * 500 + 1000); // 5
-
-  playHumanTurn();
+  padContainer.classList.remove("unclickable"), roundCount * 1000 + 500); // 5
 }
 
 /**
