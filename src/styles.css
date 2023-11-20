@@ -12,7 +12,7 @@ html {
 
 body {
   color: yellow;
-  font-family: 'Rubik Microbe', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   display: flex;
   justify-content: center;
   height: 100vh;
@@ -51,7 +51,8 @@ h1 {
   color: greenyellow;
   font-size: 18px;
   border-color: greenyellow;
-  transform: rotate(5deg);
+  transform: translateY(-5px);
+  transition: 0.25s;
 }
 
 .status {
@@ -74,13 +75,13 @@ h1 {
 .pad-red:hover,
 .pad-red:focus {
   background-color: #ff451a;
-  transform: rotate(-5deg);
+  transform: rotate(5deg);
 }
 
 .pad-red:active,
 .pad-red.activated {
   background-color: #ff5c36;
-  transform: translateY(10px);
+  transform: translateY(5px);
 }
 
 .pad-green {
@@ -97,7 +98,7 @@ h1 {
 .pad-green:active,
 .pad-green.activated {
   background-color: #a0ea00;
-  transform: translateY(10px);
+  transform: translateY(5px);
 }
 
 .pad-yellow {
@@ -114,7 +115,7 @@ h1 {
 .pad-yellow:active,
 .pad-yellow.activated {
   background-color: #ffca3d;
-  transform: translateY(10px);
+  transform: translateY(5px);
 }
 
 .pad-blue {
@@ -131,7 +132,7 @@ h1 {
 .pad-blue:active,
 .pad-blue.activated {
   background-color: #2bbcff;
-  transform: translateY(10px);
+  transform: translateY(5px);
 }
 
 .hidden {
